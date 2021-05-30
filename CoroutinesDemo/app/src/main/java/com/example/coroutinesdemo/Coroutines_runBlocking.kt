@@ -3,7 +3,7 @@ package com.example.coroutinesdemo
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.concurrent.thread
+import kotlinx.coroutines.runBlocking
 
 fun main(){    //Executes in the main thread
 
@@ -16,7 +16,9 @@ fun main(){    //Executes in the main thread
         println("Fake work ends : ${Thread.currentThread().name}")  //thread T1 or some other thread
     }
 
-    Thread.sleep(2000) //block the current main thread and wait for the coroutine to finish(not a practical way to wait)
+    runBlocking { //creates a coroutine that blocks the current main thread.
+
+        delay(2000) //block the current main thread and wait for the coroutine to finish(not a practical way to wait)
+    }
     println("Main program ends :  ${Thread.currentThread().name}")
 }
-//Unlike threads, for coroutines the application by default does not wait for it to finish its execution.

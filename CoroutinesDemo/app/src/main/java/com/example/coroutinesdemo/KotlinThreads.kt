@@ -8,7 +8,7 @@ fun main(){    //Executes in the main thread
 
     println("Main program starts :  ${Thread.currentThread().name}")
 
-    thread {  //this function creates a background coroutine that runs on a background thread.
+    thread {  //this function creates a background thread(worker thread)
         println("Fake work starts : ${Thread.currentThread().name}")
         Thread.sleep(1000)   //pretend doing some work (eg: uploading some file)
         println("Fake work ends : ${Thread.currentThread().name}")
