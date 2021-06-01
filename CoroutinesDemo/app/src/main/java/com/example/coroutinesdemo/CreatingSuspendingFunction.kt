@@ -17,6 +17,7 @@ fun main() = runBlocking{    //Executes in the main thread
         suspendForDelay(1000)  //delays only this particular coroutine
         println("Fake work ends : ${Thread.currentThread().name}")  //thread T1 or some other thread
     }
+    launch {  }
 
 
 
