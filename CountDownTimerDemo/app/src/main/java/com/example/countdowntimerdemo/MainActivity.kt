@@ -49,7 +49,8 @@ class MainActivity : AppCompatActivity() {
      */
     private fun startTimer(pauseOffsetL: Long) {
 
-        // Passing pauseOffsetL will help us in restarting the timer
+        // Passing pauseOffsetL will help us in restarting the timer(cuz every time we restart/resume we're creating
+        // a new instance of the countDownTimer)
         countDownTimer = object : CountDownTimer(timerDuration - pauseOffsetL, 1000) {
 
             // onTick() - it is called on every countDownInterval (1 sec = 1000)
