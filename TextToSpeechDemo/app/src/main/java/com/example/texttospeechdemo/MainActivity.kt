@@ -66,8 +66,8 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     public override fun onDestroy() {
 
         if (tts != null) {
-            tts!!.stop()
-            tts!!.shutdown()
+            tts!!.stop()  //Interrupts the current utterance (whether played or rendered to file) and discards other utterances in the queue.
+            tts!!.shutdown() //Releases the resources used by the TextToSpeech engine
         }
 
         super.onDestroy()
