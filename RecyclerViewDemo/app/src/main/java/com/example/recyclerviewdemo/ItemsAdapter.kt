@@ -65,8 +65,8 @@ class ItemsAdapter(val context: Context, val items: ArrayList<String>) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
 
-        Toast.makeText(context, "OnBindViewHolder", Toast.LENGTH_SHORT).show()
-        val item = items.get(position)
+        Toast.makeText(context, "OnBindViewHolder + $position", Toast.LENGTH_SHORT).show()
+        val item = items[position]
         holder.binding.itemText.text = item
 
         // Updating the background color according to the odd/even positions in list.
