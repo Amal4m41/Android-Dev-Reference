@@ -44,7 +44,8 @@ class MainActivity : AppCompatActivity() {
         // Set the LayoutManager that this RecyclerView will use.
         binding.rvItemsList.layoutManager = LinearLayoutManager(this)
         // Adapter class is initialized and list is passed in the param.
-        val itemAdapter = ItemAdapter(this, getItemsList())
+//        val itemAdapter = ItemAdapter(this, getItemsList())
+        val itemAdapter = ItemsAdapter(this, getItemsList())
         // adapter instance is set to the recyclerview to inflate the items.
         binding.rvItemsList.adapter = itemAdapter
     }
@@ -59,7 +60,8 @@ class MainActivity : AppCompatActivity() {
         // Set the LayoutManager that this RecyclerView will use.
         binding.rvItemsList.layoutManager = GridLayoutManager(this, 2)
         // Adapter class is initialized and list is passed in the param.
-        val itemAdapter = ItemAdapter(this, getItemsList())
+//        val itemAdapter = ItemAdapter(this, getItemsList())
+        val itemAdapter = ItemsAdapter(this, getItemsList())
         // adapter instance is set to the recyclerview to inflate the items.
         binding.rvItemsList.adapter = itemAdapter
     }
