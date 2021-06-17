@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llRecordItemRow"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp">
     <TextView
+        android:id="@+id/empNameTextView"
         android:layout_width="0dp"
         android:layout_weight="2"
         android:text="Name here"
@@ -11,17 +13,20 @@
         android:layout_gravity="bottom"
         android:layout_height="wrap_content"/>
     <TextView
+        android:id="@+id/empEmailTextView"
         android:layout_width="0dp"
         android:layout_weight="2"
         android:text="Email id here"
         android:layout_gravity="bottom"
         android:layout_height="wrap_content"/>
     <ImageView
+        android:id="@+id/empEditImageView"
         android:layout_width="0dp"
         android:layout_weight="0.5"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_edit_24"/>
     <ImageView
+        android:id="@+id/empDeleteImageView"
         android:layout_width="0dp"
         android:layout_weight="0.5"
         android:layout_height="wrap_content"
