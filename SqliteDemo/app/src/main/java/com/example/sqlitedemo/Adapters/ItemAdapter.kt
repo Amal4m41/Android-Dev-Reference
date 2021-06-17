@@ -70,6 +70,7 @@ class ItemAdapter(val context: Context, val items: ArrayList<EmpModelClass>) :
 
         holder.binding.empDeleteImageView.setOnClickListener {
             if(context is MainActivity){
+                //calling the main activity function
                 context.deleteRecordAlertDialog(item)
             }
         }
@@ -86,6 +87,6 @@ class ItemAdapter(val context: Context, val items: ArrayList<EmpModelClass>) :
      * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
      */
     inner class MyViewHolder(val binding: RecordItemRowBinding) : RecyclerView.ViewHolder(binding.root) {
-        // Through binding object we can access the TextView and ImageView (for each row)
+        // Through binding object which is a property of this class we can access the TextView and ImageView (for each row/item)
     }
 }

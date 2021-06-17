@@ -40,8 +40,10 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
      * Function to insert data
      */
     fun addEmployee(emp: EmpModelClass): Long {
-        val db = this.writableDatabase  //get the database
 
+        //this.writableDatabase : Create and/or open a database that will be used for reading and writing. The first time this is called, the database will be opened and onCreate, onUpgrade and/or onOpen will be called.
+        //Once opened successfully, the database is cached, so you can call this method every time you need to write to the database. (Make sure to call close when you no longer need the database.)
+        val db = this.writableDatabase  //get the database
         val contentValues = ContentValues()
         contentValues.put(KEY_NAME, emp.name) // EmpModelClass Name        (Not providing the id as it's autoincrement)
         contentValues.put(KEY_EMAIL, emp.email) // EmpModelClass Email

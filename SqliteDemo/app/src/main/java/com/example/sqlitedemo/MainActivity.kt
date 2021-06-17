@@ -35,6 +35,9 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Function is used show the list of data in the database.
+     * We don't make any changes on the array list of objects and notify the recycler view to update instead, each time there
+     * is a CRUD operation, it's directly done on the database(SQlite) and we read the data from the database and store it in
+     * an arraylist by which we update the recycler view by attaching it to the adapter.
      */
     private fun setupListofDataIntoRecyclerView() {
 
@@ -47,10 +50,10 @@ class MainActivity : AppCompatActivity() {
             //Attaching the adapter to the recycler view
             binding.recordsListRecyclerView.layoutManager = LinearLayoutManager(this)
             // Adapter class is initialized and list is passed in the param.
-
             val itemAdapter = ItemAdapter(this, employeeList)
             // adapter instance is set to the recyclerview to inflate the items.
             binding.recordsListRecyclerView.adapter = itemAdapter
+
         } else {
             //Show empty records screen
             binding.recordsListRecyclerView.visibility = View.GONE
@@ -79,11 +82,11 @@ class MainActivity : AppCompatActivity() {
             //id is autoincrement for the database, therefore just putting dummy value here
             val status = databaseHandler.addEmployee(EmpModelClass(0, name, email))
             if (status > -1) {
-                Toast.makeText(applicationContext, "Record saved", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Record saved", Toast.LENGTH_LONG).show()
                 binding.etName.text.clear()
                 binding.etEmail.text.clear()
 
-                setupListofDataIntoRecyclerView()
+                setupListofDataIntoRecyclerView()  //read the latest data from the database and update the recycler view.
             }
             else{
                 Log.e("TAG", "addRecord: Not successful")
@@ -127,9 +130,9 @@ class MainActivity : AppCompatActivity() {
                 //passing the value with the current id to be updated with the edited values
                 val status = databaseHandler.updateEmployee(EmpModelClass(empModelClass.id, name, email))
                 if (status > -1) {
-                    Toast.makeText(applicationContext, "Record Updated.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Record Updated.", Toast.LENGTH_LONG).show()
 
-                    setupListofDataIntoRecyclerView()    //update the recycler view
+                    setupListofDataIntoRecyclerView()  //read the latest data from the database and update the recycler view.
 
                     updateCustomDialog.dismiss() // Dialog will be dismissed
                 }
@@ -171,7 +174,7 @@ class MainActivity : AppCompatActivity() {
             if (status > -1) {
                 Toast.makeText(this, "Record deleted successfully.", Toast.LENGTH_LONG).show()
 
-                setupListofDataIntoRecyclerView()
+                setupListofDataIntoRecyclerView()  //read the latest data from the database and update the recycler view.
             }
 
             dialogInterface.dismiss() // Dialog will be dismissed
