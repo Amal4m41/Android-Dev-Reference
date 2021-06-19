@@ -21,10 +21,10 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         //creating table with fields
         //same as: create table EmployeeTable(_id integer primary key, name text, email text)
         //A column declared INTEGER PRIMARY KEY will autoincrement in sqlite.
-        val CREATE_CONTACTS_TABLE = ("CREATE TABLE " + TABLE_NAME + "("
+        val CREATE_EXERCISE_TABLE = ("CREATE TABLE " + TABLE_NAME + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
                 + KEY_EMAIL + " TEXT" + ")")
-        db?.execSQL(CREATE_CONTACTS_TABLE)
+        db?.execSQL(CREATE_EXERCISE_TABLE)
     }
 
     /*
@@ -57,7 +57,7 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
     }
 
     /**
-     * Function to insert data
+     * Function to read data
      */
     //method to read data
     fun viewEmployee(): ArrayList<EmpModelClass> {
