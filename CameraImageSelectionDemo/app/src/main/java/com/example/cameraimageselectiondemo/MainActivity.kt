@@ -15,18 +15,17 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.util.jar.Manifest
 
+//Using ActivityCompact to handle permissions
 class MainActivity : AppCompatActivity() {
 
     companion object{
         private const val CAMERA_PERMISSION_CODE=1
-        private const val CAMERA_REQUEST_CODE=2 // for intent
+        public const val CAMERA_REQUEST_CODE=2 // for intent
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
 
         val cameraButton:Button = findViewById<Button>(R.id.CameraButton)
         cameraButton.setOnClickListener {
@@ -43,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+//    Callback for the result from requesting permissions
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray)
     {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode== CAMERA_REQUEST_CODE){
             if(resultCode==Activity.RESULT_OK){
-                val image:Bitmap=data!!.extras!!.get("data") as Bitmap
+                val image:Bitmap=data!!.extras!!.get("data") as Bitmap  //covert the image into a bitmap
                 val imageView:ImageView=findViewById(R.id.displayImageView)
                 imageView.setImageBitmap(image)
             }
