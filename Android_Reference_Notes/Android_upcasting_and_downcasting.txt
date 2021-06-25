@@ -1,0 +1,74 @@
+
+package ch1.casting
+ 
+open class GrillCook
+ 
+class Bob : GrillCook()
+ 
+open class Wife
+ 
+class Linda : Wife()
+ 
+open class Children
+ 
+class Tina : Children()
+ 
+class Gene : Children()
+ 
+class Louise : Children()
+ 
+fun main(args : Array<String>){
+    //These are all upcasts. Since our variables are of the base type
+    //we can safely assign them to child objects without the need to cast.
+    val bob : Any = Bob()
+    val linda : Any = Linda()
+    val gene : Children = Gene()
+ 
+    //This is a safe form of down casting.
+    //If Bob is in fact a GrillCook, the next line will print
+    //"Bob is a GrillCook"
+    if (bob is GrillCook){
+        //Going forward, the compiler will treat Bob as a GrillCook object
+        //Because it now knows that Bob is a GrillCook
+ 
+        println("Bob is a GrillCook")
+    }
+ 
+    //This is the reverse of what was shown above.
+    //The line inside of the if statement only runs when linda
+    //is not a GrillCook. Note that the linda variable is still treated
+    //as type Any because the compiler only knows that Linda isn't a GrillCook
+    if (linda !is GrillCook){
+        println("Linda is not the GrillCook")
+    }
+ 
+    //We can also cast with the when expression
+    when (gene) {
+        //This line runs if gene is Gene
+        is Gene -> println("Gene is Gene")
+ 
+        //This line would only run if gene is Tina (he's not)
+        is Tina -> println("Gene is Tina")
+ 
+        //This line would only run if gene is Louise (he's not)
+        is Louise -> {
+            println("Gene is Louise")
+        }
+    }
+ 
+    //This is an example of an unsafe cast. It forces the compiler
+    //to make the conversion, but at runtime, we get a ClassCastException.
+    //Notice that the compiler does issue a warning here, but since this statement
+    //is valid, the code will compile
+    val teddy : Any = GrillCook() as Children
+}
+
+
+
+
+OUTPUT: 
+Bob is a GrillCook
+Linda is not the GrillCook
+Gene is Gene
+Exception in thread "main" java.lang.ClassCastException: ch1.casting.GrillCook cannot be cast to ch1.casting.Children
+    at ch1.casting.CastingKt.main(Casting.kt:58)

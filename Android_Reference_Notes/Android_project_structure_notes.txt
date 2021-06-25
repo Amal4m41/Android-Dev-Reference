@@ -1,0 +1,32 @@
+.gradle(folder) : build system for android, project specific cache directory
+.idea(folder) :  stores all the user configuration for android
+
+app(folder)  : also called a module, an app can be made up of one or many modules and a module is simply a collection of sources files,resources and 
+		build settings.
+
+gradle(folder) : just stores the gradle wrapper.
+
+(top-level/project-level) build.gradle file : contains configs and tasks and important information for gradle in order to carry out your actual builds
+                                              (i.e bringing together of all of the files), this top-level gradle files contains the configs and options 
+					      common to all subprojects and modules.(basically all modules inherit from this gradle file).
+
+
+gradle.properties file : the Gradle process that actually builds your app bringing all bits together is actually a Java process, it runs on the JVM  and the 
+			properties of that JVM can be configured and this is the file that does it(eg: caching, memory allowances etc.).
+
+gradlew file : very important file, this is a script which trigers the gradle wrapper which is in the gradle folder. gradlew file is how all Gradle tasks should
+		be run.
+
+gradlew.bat file : windows runnable version of the gradlew script.
+
+local.properties file: file to configure local environment properties for your build system. eg: the only line isn't commented is telling the build system/android studio 
+			/gradle where the android sdk located on the users machine.
+
+setting.gradle file : tells gradle which modules to be included in the build. 
+
+
+External libraries(area, not a folder in the project structure) : a place for android studio to keep all the dependencies of your app(android sdk,codes etc) 
+								  in a visual area, so we can click and see it's code.
+Scratches and Consoles(area, not a folder in the project structure) : -> Scratches : contain scratch files(to note down notes etc) across our android studio projects
+									(a common place to store notes for all projects in our android studio), won't affect our codes.
+								      -> Studio Consoles : where we can write simple scripts to automate the Android studio IDE.

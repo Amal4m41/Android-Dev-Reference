@@ -1,0 +1,308 @@
+activity_add_meal_menu.xml--------------------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bluish_dark"
+    tools:context=".activities.centres.AddCentres">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/add_centre_save_slider"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/weekdaysList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="24dp"
+                android:entries="@array/weekdays"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/add_centre_title_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="24dp"
+                android:text="Add Meal Menu"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/add_centre_help_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:text="Fill in the details of the meal menu that is to be added."
+                android:textColor="@color/cyan_accent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_centre_title_text" />
+
+            <Spinner
+                android:id="@+id/centreNamesList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="68dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_centre_help_text" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:text="Choose center *"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/centreNamesList" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:text="Choose weekday *"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weekdaysList" />
+
+<!--            <Button-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="500dp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/textView3"-->
+<!--                android:layout_marginTop="10dp">-->
+
+<!--            </Button>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView3"
+                android:layout_marginTop="80dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enter meal menu list" />
+
+                <LinearLayout
+                    android:id="@+id/layoutList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></LinearLayout>
+
+                <Button
+                    android:id="@+id/btnAddDishRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:drawableEnd="@drawable/ic_add"
+                    android:background="@drawable/round_grey"
+
+                    android:text="Add Dish"/>
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <com.amannirala13.pixslidebar.PixSlideBar
+        android:id="@+id/add_centre_save_slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:message="Save"
+        app:message_color="@color/peach" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+row_add_dish_meal_menu.xml--------------------------------------------------------------------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
+
+    <EditText
+        android:id="@+id/etDishName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:hint="Enter dish"
+        android:background="@drawable/round_grey"/>
+    <ImageView
+        android:id="@+id/imageRemoveDish"
+        android:background="@drawable/round_grey"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_close"
+        android:layout_gravity="center_vertical"
+        android:onClick="removeView"/>
+</LinearLayout>
+
+
+
+
+AddMealMenu.kt------------------------------------------------------------------
+package com.aadhar_samajik_sanstha.android.activities.mealmenu
+
+import android.content.Context
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.Toast
+import com.aadhar_samajik_sanstha.android.R
+import com.aadhar_samajik_sanstha.android.databinding.ActivityAddMealMenuBinding
+import com.aadhar_samajik_sanstha.android.constants.CENTRE_LIST
+import com.aadhar_samajik_sanstha.android.viewmodels.centresListViewModel
+
+class AddMealMenu : AppCompatActivity() {
+
+    private lateinit var binding: ActivityAddMealMenuBinding
+
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityAddMealMenuBinding.inflate(layoutInflater)   //making the layout visible for us to access.
+        setContentView(binding.root)
+
+
+        setListOfCentre()
+        binding.centreNamesList.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Toast.makeText(this@AddMealMenu,
+                        "Selected Centre Name : ${parent?.getItemAtPosition(position)}",
+                        Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                //There's no case of no item being selected as we have provided the possible values.
+            }
+        }
+
+
+
+
+        binding.weekdaysList.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Toast.makeText(this@AddMealMenu,
+                        "Selected weekday : ${parent?.getItemAtPosition(position)}",
+                        Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                //There's no case of no item being selected as we have provided the possible values.
+            }
+        }
+
+
+
+        binding.btnAddDishRow.setOnClickListener {
+            addView()   //add a new row to enter the dish
+        }
+
+//        closeImageView.setOnClickListener {
+//            removeView(it)
+//        }
+    }
+
+    private fun addView(){
+        val inflater=getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val rowView:View=inflater.inflate(R.layout.row_add_dish_meal_menu,null)
+        binding.layoutList.addView(rowView)
+    }
+
+    fun removeView(view: View){
+//        Toast.makeText(this, "Remove this field view", Toast.LENGTH_SHORT).show()
+        binding.layoutList.removeView(view.parent as View)
+    }
+
+
+
+
+    private fun setListOfCentre(){
+        centresListViewModel?.centresList()?.observe(this,{
+//            Toast.makeText(this, "${it.toString()}", Toast.LENGTH_LONG).show()
+//            Log.e("VALUE_LIST","$it.toString()")
+            val listOfCentreNames= mutableListOf<String>()
+            for(i in it){
+                listOfCentreNames.add(i.name)
+            }
+            val adapter = ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item, listOfCentreNames)
+            binding.centreNamesList.adapter=adapter
+        })
+    }
+
+
+
+
+}
+
+
