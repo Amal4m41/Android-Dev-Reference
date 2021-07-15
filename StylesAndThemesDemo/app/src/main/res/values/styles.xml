@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="myTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+<!-- Sub classing user defined style:
+ We inherit the custom style and tweak the textsize for our title text-->
+    <style name="myTextStyle.Title">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+<!--  Sub classing a style from android attributes package
+ Styles and theme are the same thing but it's just a different naming convention when it's
+ being applied to an entire activity or application.
+ Here will make a theme(a style we'll be using to apply to an entire activity).
+ We only want to include attributes in a style element that's intended to be a theme if
+ we want them to be applied to every single view in an activity or the application-->
+    <style name="MyAppStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">serif-monospace</item>
+    </style>
+</resources>
