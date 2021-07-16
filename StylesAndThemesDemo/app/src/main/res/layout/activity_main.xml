@@ -18,8 +18,7 @@
     <TextView
         android:id="@+id/prompt"
         android:layout_above="@id/buttonLogin"
-        android:text="Please log in to have more fun!"
-        style="@style/myTextStyle"/>
+        android:text="Please log in to have more fun!"/>
     <Button
         android:id="@+id/buttonLogin"
         android:layout_alignParentBottom="true"
