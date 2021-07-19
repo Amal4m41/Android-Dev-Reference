@@ -12,6 +12,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+//Demo code for chain result coroutines, i.e. get a result from one api request(done in bg) and use that
+// result for the next api call etc.
 class MainActivity : AppCompatActivity() {
 
     private val RESULT_1="Result #1"

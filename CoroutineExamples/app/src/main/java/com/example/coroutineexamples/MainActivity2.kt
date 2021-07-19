@@ -10,6 +10,8 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 
+//Code for coroutine jobs: create independent jobs, then cancel or complete it and do necessary UI changes etc.
+// for completion or cancellation of a job.
 class MainActivity2 : AppCompatActivity() {
 
     private val PROGRESS_MAX=100
