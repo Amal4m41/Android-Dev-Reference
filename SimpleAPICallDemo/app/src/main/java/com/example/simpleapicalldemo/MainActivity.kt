@@ -6,6 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import org.json.JSONObject
 import java.io.BufferedInputStream
 import java.io.BufferedReader
 import java.io.IOException
@@ -17,23 +22,29 @@ import java.net.SocketTimeoutException
 import java.net.URL
 
 class MainActivity : AppCompatActivity() {
+
+    private val TAG:String="MainActivityTag"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        CallAPILoginAsyncTask().execute()  //execute the background process
+        CallAPILoginAsyncTask().startApiCall()  //execute the background process
     }
 
-    private inner class CallAPILoginAsyncTask(): AsyncTask<Any, Void, String>(){
+    private inner class CallAPILoginAsyncTask(){
 
         private lateinit var customProgressDialog:Dialog
 
-        override fun onPreExecute() {
-            super.onPreExecute()
+        fun startApiCall() {
             showProgressDialog()
+            lifecycleScope.launch(Dispatchers.IO) {
+//                delay(5000L)
+                val stringResult=makeApiCall()
+                afterCallFinish(stringResult)
+            }
         }
 
-        override fun doInBackground(vararg params: Any?): String {
+        fun makeApiCall(): String {
             var result:String
             var connection: HttpURLConnection?=null
 
@@ -90,16 +101,78 @@ class MainActivity : AppCompatActivity() {
             return result
         }
 
-        override fun onPostExecute(result: String?) {
-            super.onPostExecute(result)
+        fun afterCallFinish(result: String) {
             cancelProgressDialog()
 
-            Log.i("RESULT", result.toString())
+            Log.i("JSON RESPONSE RESULT", result)
+            /*
+Output:
+{
+"Name":"testing simple api",
+"Dummy_no":123,
+"Profile_details":{
+"is_profile_completed":true,
+"rating":4.7
+},
+"data_list":[
+{"id":1,"name":"Messi"},{"id":2,"name":"Neymar"},{"id":3,"name":"Zlatan"}]
+
+}
+ */
+
+            val jsonObject=JSONObject(result) //create json object from string
+
+            val name=jsonObject.optString("Name") //getting the value using key from json object(return "" if key doesn't exist)
+//            Log.i(TAG, "afterCallFinish: $name")
+// Returns the value mapped by {name} if it exists.
+            val dummyNo = jsonObject.optInt("Dummy_no")
+            Log.i(TAG, "$dummyNo")
+
+            // Returns the value mapped by {name} if it exists.
+//            val Profile_details = jsonObject.optString("Profile_details")
+//            Log.i("Name", "$Profile_details")
+//
+//            // Returns the value mapped by {name} if it exists.
+//            val is_profile_completed = jsonObject.optBoolean("is_profile_completed")
+//            Log.i("Email", "$is_profile_completed")
+//
+//            // Returns the value mapped by {name} if it exists.
+//            val rating = jsonObject.optDouble("rating")
+//            Log.i("Mobile", "$rating")
+
+            // Returns the value mapped by {name} if it exists.
+            val profileDetailsObject = jsonObject.optJSONObject("Profile_details")
+
+            val isProfileCompleted = profileDetailsObject.optBoolean("is_profile_completed")
+            Log.i(TAG, "$isProfileCompleted")
+
+            val rating = profileDetailsObject.optDouble("rating")
+            Log.i(TAG, "$rating")
+
+            // Returns the value mapped by {name} if it exists.
+            val dataListArray = jsonObject.optJSONArray("data_list")
+            Log.i(TAG, "${dataListArray.length()}")
+
+            for (item in 0 until dataListArray.length()) {
+                Log.i(TAG, "${dataListArray[item]}")
+
+                // Returns the value mapped by {name} if it exists.
+                val dataItemObject: JSONObject = dataListArray[item] as JSONObject
+
+                val id = dataItemObject.optInt("id")
+                Log.i(TAG, "$id")
+
+                val name_sub = dataItemObject.optString("name")
+                Log.i(TAG, "$name_sub")
+            }
+
+
         }
 
         private fun showProgressDialog(){
             customProgressDialog= Dialog(this@MainActivity)
             customProgressDialog.setContentView(R.layout.dialog_custom_progress)
+            customProgressDialog.setCancelable(false)
             customProgressDialog.show()
         }
 
