@@ -11,10 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.json.JSONObject
-import java.io.BufferedInputStream
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
+import java.io.*
 import java.lang.Exception
 import java.lang.StringBuilder
 import java.net.HttpURLConnection
@@ -28,10 +25,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        CallAPILoginAsyncTask().startApiCall()  //execute the background process
+        CallAPILoginAsyncTask("Amal4m41","123pwd").startApiCall()  //execute the background process
     }
 
-    private inner class CallAPILoginAsyncTask(){
+    private inner class CallAPILoginAsyncTask(val username:String, val password:String){
 
         private lateinit var customProgressDialog:Dialog
 
@@ -53,6 +50,69 @@ class MainActivity : AppCompatActivity() {
                 connection= url.openConnection() as HttpURLConnection?   //Returns a URLConnection instance that represents a connection to the remote object referred to by the URL.
                 connection!!.doInput=true  //doInput tells if we get any data(by default doInput will be true and doOutput false)
                 connection!!.doOutput=true //doOutput tells if we send any data with the api call
+
+
+                /**
+                 * Sets whether HTTP redirects should be automatically followed by this instance.
+                 * The default value comes from followRedirects, which defaults to true.
+                 */
+                connection.instanceFollowRedirects = false
+
+                /**
+                 * Set the method for the URL request, one of:
+                 *  GET
+                 *  POST
+                 *  HEAD
+                 *  OPTIONS
+                 *  PUT
+                 *  DELETE
+                 *  TRACE
+                 *  are legal, subject to protocol restrictions.  The default method is GET.
+                 */
+                connection.requestMethod = "POST"
+
+                /**
+                 * Sets the general request property. If a property with the key already
+                 * exists, overwrite its value with the new value.
+                 */
+                connection.setRequestProperty("Content-Type", "application/json")
+                connection.setRequestProperty("charset", "utf-8")
+                connection.setRequestProperty("Accept", "application/json")
+
+                /**
+                 * Some protocols do caching of documents.  Occasionally, it is important
+                 * to be able to "tunnel through" and ignore the caches (e.g., the
+                 * "reload" button in a browser).  If the UseCaches flag on a connection
+                 * is true, the connection is allowed to use whatever caches it can.
+                 *  If false, caches are to be ignored.
+                 *  The default value comes from DefaultUseCaches, which defaults to
+                 * true.
+                 */
+                connection.useCaches = false
+
+                /**
+                 * Creates a new data output stream to write data to the specified
+                 * underlying output stream. The counter written is set to zero.
+                 */
+                val wr = DataOutputStream(connection.outputStream)
+
+                // Create JSONObject Request
+                val jsonRequest = JSONObject()
+                jsonRequest.put("username", username) // Request Parameter 1
+                jsonRequest.put("password", password) // Request Parameter 2
+
+                /**
+                 * Writes out the string to the underlying output stream as a
+                 * sequence of bytes. Each character in the string is written out, in
+                 * sequence, by discarding its high eight bits. If no exception is
+                 * thrown, the counter written is incremented by the
+                 * length of s.
+                 */
+                wr.writeBytes(jsonRequest.toString())
+                wr.flush() // Flushes this data output stream.
+                wr.close() // Closes this output stream and releases any system resources associated with the stream
+
+
 
                 val httpResult:Int=connection.responseCode
                 if(httpResult==HttpURLConnection.HTTP_OK){
