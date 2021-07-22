@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -180,51 +181,69 @@ Output:
 }
  */
 
-            val jsonObject=JSONObject(result) //create json object from string
+            //USING GSON library
+            //This method deserializes the specified Json into an object of the specified class
+            val responseData=Gson().fromJson(result,ResponseData::class.java) //use ResponseData as the model for the 'result' string json
+            Log.i("Message",  "Name: ${responseData.Name}")
+            Log.i("Message", "No: ${responseData.Dummy_no}")
+            Log.i("Message", "Profile details: ${responseData.Profile_details}")
+            Log.i("Message", "Profile details isProfileCompleted: ${responseData.Profile_details.is_profile_completed}")
+            Log.i("Message", "Profile details rating: ${responseData.Profile_details.rating}")
+            Log.i("Message", "dataList: ${responseData.data_list}")
 
-            val name=jsonObject.optString("Name") //getting the value using key from json object(return "" if key doesn't exist)
-//            Log.i(TAG, "afterCallFinish: $name")
-// Returns the value mapped by {name} if it exists.
-            val dummyNo = jsonObject.optInt("Dummy_no")
-            Log.i(TAG, "$dummyNo")
-
-            // Returns the value mapped by {name} if it exists.
-//            val Profile_details = jsonObject.optString("Profile_details")
-//            Log.i("Name", "$Profile_details")
-//
-//            // Returns the value mapped by {name} if it exists.
-//            val is_profile_completed = jsonObject.optBoolean("is_profile_completed")
-//            Log.i("Email", "$is_profile_completed")
-//
-//            // Returns the value mapped by {name} if it exists.
-//            val rating = jsonObject.optDouble("rating")
-//            Log.i("Mobile", "$rating")
-
-            // Returns the value mapped by {name} if it exists.
-            val profileDetailsObject = jsonObject.optJSONObject("Profile_details")
-
-            val isProfileCompleted = profileDetailsObject.optBoolean("is_profile_completed")
-            Log.i(TAG, "$isProfileCompleted")
-
-            val rating = profileDetailsObject.optDouble("rating")
-            Log.i(TAG, "$rating")
-
-            // Returns the value mapped by {name} if it exists.
-            val dataListArray = jsonObject.optJSONArray("data_list")
-            Log.i(TAG, "${dataListArray.length()}")
-
-            for (item in 0 until dataListArray.length()) {
-                Log.i(TAG, "${dataListArray[item]}")
-
-                // Returns the value mapped by {name} if it exists.
-                val dataItemObject: JSONObject = dataListArray[item] as JSONObject
-
-                val id = dataItemObject.optInt("id")
-                Log.i(TAG, "$id")
-
-                val name_sub = dataItemObject.optString("name")
-                Log.i(TAG, "$name_sub")
+            for(i in responseData.data_list.indices){
+                Log.i("Message", "dataList item : ${responseData.data_list[i]}")
+                Log.i("Message", "dataList id: ${responseData.data_list[i].id}")
+                Log.i("Message", "dataList name: ${responseData.data_list[i].name}")
             }
+
+
+
+//            val jsonObject=JSONObject(result) //create json object from string
+//
+//            val name=jsonObject.optString("Name") //getting the value using key from json object(return "" if key doesn't exist)
+////            Log.i(TAG, "afterCallFinish: $name")
+//// Returns the value mapped by {name} if it exists.
+//            val dummyNo = jsonObject.optInt("Dummy_no")
+//            Log.i(TAG, "$dummyNo")
+//
+//            // Returns the value mapped by {name} if it exists.
+////            val Profile_details = jsonObject.optString("Profile_details")
+////            Log.i("Name", "$Profile_details")
+////
+////            // Returns the value mapped by {name} if it exists.
+////            val is_profile_completed = jsonObject.optBoolean("is_profile_completed")
+////            Log.i("Email", "$is_profile_completed")
+////
+////            // Returns the value mapped by {name} if it exists.
+////            val rating = jsonObject.optDouble("rating")
+////            Log.i("Mobile", "$rating")
+//
+//            // Returns the value mapped by {name} if it exists.
+//            val profileDetailsObject = jsonObject.optJSONObject("Profile_details")
+//
+//            val isProfileCompleted = profileDetailsObject.optBoolean("is_profile_completed")
+//            Log.i(TAG, "$isProfileCompleted")
+//
+//            val rating = profileDetailsObject.optDouble("rating")
+//            Log.i(TAG, "$rating")
+//
+//            // Returns the value mapped by {name} if it exists.
+//            val dataListArray = jsonObject.optJSONArray("data_list")
+//            Log.i(TAG, "${dataListArray.length()}")
+//
+//            for (item in 0 until dataListArray.length()) {
+//                Log.i(TAG, "${dataListArray[item]}")
+//
+//                // Returns the value mapped by {name} if it exists.
+//                val dataItemObject: JSONObject = dataListArray[item] as JSONObject
+//
+//                val id = dataItemObject.optInt("id")
+//                Log.i(TAG, "$id")
+//
+//                val name_sub = dataItemObject.optString("name")
+//                Log.i(TAG, "$name_sub")
+//            }
 
 
         }
