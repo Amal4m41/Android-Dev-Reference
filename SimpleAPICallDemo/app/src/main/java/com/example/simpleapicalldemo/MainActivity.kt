@@ -11,6 +11,7 @@ import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.io.*
 import java.lang.Exception
@@ -38,7 +39,9 @@ class MainActivity : AppCompatActivity() {
             lifecycleScope.launch(Dispatchers.IO) {
 //                delay(5000L)
                 val stringResult=makeApiCall()
-                afterCallFinish(stringResult)
+                withContext(Dispatchers.Main){
+                    afterCallFinish(stringResult)
+                }
             }
         }
 
