@@ -4,6 +4,7 @@ import com.example.interoperabilitydemo.MyCustomKotlinFile;
 
 public class MyJavaFile {
 
+    public int a=100;
     public static void main(String[] args) {
         //Calling the kotlin method inside a java file
 //        int result = MyfirstKt.add(1,2);
@@ -13,6 +14,10 @@ public class MyJavaFile {
 
     public static int getArea(int l, int b){
         return l*b;
+    }
+
+    public void displayName(){
+        System.out.println(a);
     }
 
 

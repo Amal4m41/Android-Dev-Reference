@@ -15,6 +15,8 @@ fun main(args: Array<String>) {
     //Accessing java method from kotlin file
     val area = MyJavaFile.getArea(4,3)
     println(area)
+
+    MyJavaFile().displayName()
 }
 
 
