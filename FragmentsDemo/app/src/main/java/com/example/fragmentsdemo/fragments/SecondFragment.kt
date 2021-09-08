@@ -12,26 +12,29 @@ import com.example.fragmentsdemo.R
 import com.example.fragmentsdemo.databinding.FragmentFirstBinding
 import com.example.fragmentsdemo.databinding.FragmentSecondBinding
 
-class SecondFragment : Fragment() {
+class SecondFragment : Fragment(R.layout.fragment_second) {
 
     private var _binding: FragmentSecondBinding? = null
     private val binding  get() = _binding!!
 
     // This will be called between onCreate(Bundle) and onViewCreated(View, Bundle).
     //The views are created in onCreateView(), i.e. we cannot access view elements inside of onCreate()
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
-        return _binding?.root
-    }
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?): View? {
+//        // Inflate the layout for this fragment
+///*
+////        method-1
+//        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+//        return _binding?.root
+//*/
+//    }
     //    OR just pass the layout in the Fragment constructor parameter.
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding = FragmentSecondBinding.inflate(layoutInflater)
+        _binding = FragmentSecondBinding.bind(view)  //if the view is already inflated then we can just bind it to view binding.
         changeDummyText()
     }
 
