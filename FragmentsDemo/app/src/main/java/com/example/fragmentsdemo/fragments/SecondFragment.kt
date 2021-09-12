@@ -41,6 +41,7 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
     private fun changeDummyText(){
         binding.tvDummyText.text="Changed text"
 //        view.findViewById<TextView>(R.id.tvDummyText).text="Changed text"
+
     }
 
 
