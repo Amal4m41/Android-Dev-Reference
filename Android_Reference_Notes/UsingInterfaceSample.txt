@@ -1,0 +1,49 @@
+Something doesn't feel right about having a which() statement on the Activity classes in the FireStoreClass helper.  Switching on a type of an object is usually not a best practice in object-oriented languages.
+
+Each time there is new class that wants to call this, it requires adding to which() statements, several place in FireStoreClass.  That is not a very robust helper.
+
+Also having the FireStoreClass know about ProgressDialogs seems very "unencapsulated". Cleaning up dialogs seems the responsibility of the Activities that own them, upon success or fail callbacks.
+
+I tried implementing this using Interfaces which came out pretty clean, if I must say so.
+
+open class FirestoreHelper {
+    private val mFirestore = FirebaseFirestore.getInstance()
+ 
+    interface UserAddCallback {
+        fun databaseUserAdded()
+        fun databaseUserAddFailed(errorString: String)
+    }
+ 
+    interface UserDataLoadCallback {
+        fun userDataLoaded(user: User)
+        fun userDataLoadFailed(errorString: String)
+    }
+    
+    fun addUserToDatabase(callback: UserAddCallback, userInfo: User) {
+        mFirestore.collection(ProjectMasterDbContract.USERS)
+            .document(getCurrentUserId())
+            .set(userInfo, SetOptions.merge())
+            .addOnSuccessListener {
+                Log.d("FirestoreHelper", "addUserToDatabase: SUCCESS")
+                callback.databaseUserAdded()
+            }
+            .addOnFailureListener { err ->
+                Log.d("FirestoreHelper", "addUserToDatabase: FAILED")
+                callback.databaseUserAddFailed(err.message!!)
+            }
+    }
+ 
+    fun loadUserData(callback: UserDataLoadCallback) {
+        mFirestore.collection(ProjectMasterDbContract.USERS)
+            .document(getCurrentUserId())
+            .get()
+            .addOnSuccessListener { document ->
+                val loggedInUser = document.toObject(User::class.java)
+                Log.d("FirestoreHelper", "signInUserToDatabase: SUCCESS - ${loggedInUser?.name}")
+                callback.userDataLoaded(loggedInUser!!)
+            }
+            .addOnFailureListener { err ->
+                Log.d("FirestoreHelper", "signInUserToDatabase: FAILED")
+                callback.userDataLoadFailed(err.message!!)
+            }
+    }
